@@ -1,0 +1,70 @@
+Fouilles des données :
+Input : mettre les données dans HDFS
+
+
+Afficher les compartiments de S3 :
+aws s3 ls
+
+
+Afficher les dossiers de notre compartiment « databasevelib»
+Hadoop fs –ls s3://databasevelib/
+
+
+
+
+Copier les fichiers « stations.csv» , « stations_lyon_geo.csv » et «contracts.csv»de s3 à hadoop
+
+hadoop distcp s3://databasevelib/input/ stations.csv /user/hadoop/ stations.csv
+hadoop distcp s3://databasevelib/input/contracts.csv/user/hadoop/ contracts.csv
+hadoop distcp s3://databasevelib/input/stations_lyon_geo.csv/user/hadoop/ stations_lyon_geo.csv
+
+
+Afficher les fichers qui sont dans HDFS :
+Hadoop fs –ls /user/hadoop
+
+
+Analyser les données avec hive
+
+Création de base des données :
+Create database velibanalysis ;
+
+
+Afficher les bases des donnés :
+Show databases ;
+
+Choisir la base velibanalysis
+Use velibanalysis ;
+
+Création de la table CONTRACT
+CREATE TABLE IF NOT EXISTS velibanalysis.contract (
+contract_id INT,
+contract_name STRING,
+commercial_name STRING, country_code STRING,
+cities STRING);
+
+
+
+
+Création de la table STATIONS
+CREATE TABLE IF NOT EXISTS velibanalysis.stations (
+contract_id INT,
+station_number STRING,
+status STRING,
+bike_stands STRING,
+bonus STRING,
+banking STRING,
+latitude FLOAT,
+longitude FLOAT,
+address STRING,
+station_name STRING);
+
+
+Création de la table DATA
+CREATE TABLE IF NOT EXISTS velibanalysis.data (
+contract_id INT,
+station_number INT,
+available_bikes INT,
+available_bike_stands INT);
+
+
+
