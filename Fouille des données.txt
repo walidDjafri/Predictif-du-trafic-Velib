@@ -1,4 +1,4 @@
-Fouilles des données :
+Fouille des données :
 Input : mettre les données dans HDFS
 
 
